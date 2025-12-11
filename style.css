@@ -1,0 +1,31 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+.container{
+    display: flex;
+    height: 100vh;
+    position: relative;
+}
+.left{
+    width: 20%;
+    height: 100vh;
+    position: fixed; /* Changed from absolute to fixed */
+    left: 0;
+    top: 0;
+    /* Removed z-index: 100 */
+}
+.right{
+    width: 80%;
+    height: 100vh;
+    position: absolute;
+    right: 0;
+    top: 0;
+    overflow-y: auto;
+    margin-left: 20%; /* This pushes it to the right */
+}
+.library{
+    margin-top: 7px;
+    height: 100%;
+}

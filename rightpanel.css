@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+.nav {
+    width: 100%;
+    height: 45px; /* Increased height */
+    padding: 8px 20px;
+    
+    /* FIX: Fixed positioning for nav bar */
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 77%; /* Match .right width */
+    z-index: 99; /* Lower than left panel's z-index */
+    
+    background-color: rgb(29, 29, 29);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* FIX: Arrow container */
+.arrow {
+    display: flex;
+    gap: 15px;
+}
+
+.arrow img {
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    /* background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    padding: 4px; */
+}
+
+/* FIX: Login container */
+.login {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.login button {
+    height: 40px;
+    min-width: 90px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.loginbtn {
+    background-color: white;
+    color: black;
+    border: none;
+}
+
+.loginbtn:hover {
+    transform: scale(1.05);
+}
+
+.signup {
+    background-color: transparent;
+    color: rgb(167, 167, 167);
+    border: none;
+    font-weight: bold;
+}
+
+.signup:hover {
+    color: white;
+    transform: scale(1.05);
+}
+
+/* FIX: Content area - add margin-top to push content below fixed nav */
+.playlist {
+    margin-top: 70px; /* This pushes content down below the fixed nav */
+    padding: 0 20px;
+}
+
+.play-text {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.cards img {
+    width: 200px;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.cards img:hover {
+    transform: scale(1.02);
+}
+
+.m1 {
+    margin-top: 15px;
+}
+
+.cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.cardtitle {
+    padding-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.about {
+    color: rgb(167, 167, 167);
+    font-size: 14px;
+}
+
+.cardone, .cardtwo, .cardthree {
+    padding: 17px;
+    background-color: #181818;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+    width: 220px;
+}
+
+.cardone:hover, .cardtwo:hover, .cardthree:hover {
+    background-color: #282828;
+}
+
+body {
+    background-color: black;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.right::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.right {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.set-width{
+    width: 200px;
+    height: 200px;
+
+
+}

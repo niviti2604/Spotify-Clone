@@ -1,0 +1,22 @@
+.controls{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+}
+.volume-button{
+    /* padding-top: 23px; */
+    width: 24px;
+}
+/* .volume-seekbar{
+    width:120px;
+    height: 4px;
+    padding-right: 5px;
+    background-color: #292929;
+} */
+.volume-rectangle{
+    height: 5px;
+    accent-color: #3BE276;
+    cursor: pointer;
+}

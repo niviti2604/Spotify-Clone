@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify</title>
+    <link rel="icon" href="logo.png">
+
+    <link rel="stylesheet" href="utility.css">
+    <link rel="stylesheet" href="rightpanel.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="playbutton.css">
+    <link rel="stylesheet" href="library.css">
+    <link rel="stylesheet" href="reponsiveness.css">
+    <link rel="stylesheet" href="volume.css">
+</head>
+
+<body>
+    <div class="container border ">
+        <div class="left text-white bg-black">
+            <div class="home bg-grey round-border">
+                <div class="spotify-logo">
+                    <img src="spotify.svg" alt="Spotify" class="invert">
+                </div>
+                <div class="home-icon">
+                    <img src="home.svg" alt="HOME" class="invert">
+                    <div>Home</div>
+                </div>
+                <div class="search-icon">
+                    <img src="search.svg" alt="Search" class="invert">
+                    <div>Search</div>
+                </div>
+
+            </div>
+            <div class="library bg-grey round-border">
+                <div class="lib-title">
+                    <img src="library.svg" alt="Library" class="invert">
+                    Your Library
+                </div>
+                <div class="lib-cards">
+                    <ul>
+                        <!-- <li>
+                            <img src="music-note-svgrepo-com.svg" alt="" class="invert">
+                            <div class="info">
+                                <div class="bold">Song Name</div>
+                                <div class="normal">Artist</div>
+                            </div>
+                            <img src="Play.svg" alt="" class="invert">
+                        </li> -->
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="right  text-white bg-grey">
+            <div class="nav bg-grey-light ">
+
+                <img src="hamburger.svg" alt="" class="hamburger invert">
+
+                <div class="arrow invert">
+                    <img src="arrow-left.svg" alt="Left">
+                    <img src="Arrow-right.svg" alt="Left">
+                </div>
+                <div class="login">
+                    <button class="signup bg-grey-light text-white"> Sign Up</button>
+                    <button class="loginbtn"> Log In</button>
+                </div>
+            </div>
+            <div class="playlist bg-grey">
+                <div class="play-text text-white">Spotify Playlist</div>
+                <div class="cards m1">
+                    <div class="card bg-grey-light round-border">
+                        <img src="tumhotoh.jpg" alt="tumhotoh">
+                        <div class="cardtitle">
+                            Tum Ho Toh
+                        </div>
+                        <div class="about">
+                            Arijit Singh, Neha Kakkar
+                        </div>
+                    </div>
+                    <div class="card bg-grey-light round-border">
+                        <img src="love.jpg" alt="Dooron Dooron">
+                        <div class="cardtitle">Dooron Dooron</div>
+                        <div class="about">Paresh Pahuja</div>
+                    </div>
+                    <div class="card bg-grey-light round-border">
+                        <img src="hindi.jpg" alt="Mileya mileya">
+                        <div class="cardtitle">Mileya Mileya</div>
+                        <div class="about">Farhan Akhtar</div>
+                    </div>
+                    <div class="card bg-grey-light round-border ">
+                        <img src="Student_of_the_Year_Poster.jpg" alt="Om Shanti Om" class="set-width">
+                        <div class="cardtitle">Radha</div>
+                        <div class="about">Farhan Akhtar</div>
+                    </div>
+                    <div class="card bg-grey-light round-border">
+                        <img src="moneyheist.jpg" alt="Om Shanti Om" class="set-width">
+                        <div class="cardtitle">Be My Baby</div>
+                        <div class="about">Farhan Akhtar</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="blank set-width">
+
+            </div>
+
+        </div>
+
+        <div class="play border-red">
+
+            <div class="song marginone">
+                <img src="raone.jpg" alt="Raone" class="song-info-image">
+                <div class="song-info margintwo">
+                    <div class="song-title text-white">Chammak Challo</div>
+                    <div class="song-artist text-grey">Vishal Shekhar, Shahrukh Khan, Kareena </div>
+                </div>
+            </div>
+            <div class="createbutton text-white">
+                <img src="plus-circle-svgrepo-com.svg" alt="" class="invert">
+            </div>
+            <div class="slide-bar border-red">
+
+                <div class="contols-slide-bar">
+                    <img src="revind-arrow.svg" alt="" class="invert arrow-slidebar" id="previous">
+                    <img src="play-button.svg" alt=" Play button" class="play-controls-slidebar invert" id="play">
+                    <img src="fwd-arrow.svg" alt="" class="invert arrow-slidebar" id="next">
+                </div>
+                <div class="seek-bar-square">
+                    <div class="starttime">
+                        00:00
+                    </div>
+                    <div class="seekbar">
+                        <div class="circle">
+
+                        </div>
+                    </div>
+                    <div class="currenttime">
+                        12:00
+                    </div>
+                </div>
+            </div>
+            <div class="controls border-red">
+                <img src="volume.svg" class="volume-button invert" alt="">
+                <div class="volume-seekbar">
+                    <input type="range" class="volume-rectangle">
+                    <!-- <div class="circle"></div> -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+
+</body>
+
+</html>

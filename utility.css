@@ -1,0 +1,42 @@
+.bg-black{
+    background-color: black;
+}
+.text-white{
+    color: white;
+}
+.bg-grey{
+    background-color: rgb(12, 12,12);
+}
+.round-border{
+    border-radius: 8px;
+}
+.border-red{
+    border: 2px solid black;
+}
+.bg-grey-light{
+    background-color: rgb(29, 29, 29);
+}
+.invert{
+    filter: invert(1);
+}
+.home img{
+    width: 24px;
+}
+.home{
+    cursor: pointer;
+    padding: 13px;
+    gap: 7px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.library img{
+    width: 24px;
+}
+.library{
+    padding: 13px;
+    
+}
+.lib-title{
+   cursor: pointer;
+}

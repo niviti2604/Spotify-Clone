@@ -1,0 +1,88 @@
+/* Default state: Hamburger is hidden on desktop */
+.hamburger {
+    display: none;
+}
+
+/* Mobile Rules */
+@media (max-width: 426px) {
+    
+    /* --- 1. Top Navbar & Hamburger Fixes --- */
+    .hamburger {
+       display: block !important; /* Force it to show */
+        cursor: pointer;
+        width: 30px;  /* Give it a definitive size */
+        height: 30px;
+    }
+
+    .left {
+        background-color: black;
+        position: absolute;
+        left: -100%; /* Hides menu off-screen by default */
+        transition: all 0.3s;
+        z-index: 1;
+        width: 233px;
+        top: 0; /* Changed from 55px to 0 to cover full height if needed */
+        height: 100vh;
+        padding-top: 60px; /* Push content down so it doesn't hide behind Close button if added */
+    }
+
+    .nav {
+       width: 100% !important; /* Override the 77% from desktop */
+        left: 0 !important;     /* Stick it to the left edge */
+        right: 0 !important;
+        position: fixed;
+        z-index: 1000;          /* Ensure it sits on top of everything */
+        box-sizing: border-box;
+    }
+
+    /* --- 2. Bottom Playbar Fixes --- */
+    .play {
+        height: auto;        /* Allow height to grow */
+        min-height: 130px;   /* Give it space */
+        flex-direction: column; /* Stack Song Info -> Seekbar -> Controls */
+        padding: 15px 10px;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .slide-bar {
+        width: 100% !important; /* Force full width */
+        padding: 0;
+        height: auto;
+    }
+
+    .seekbar {
+        width: 95% !important; /* Make seekbar almost full width */
+        margin: 10px auto;     /* Center it with some spacing */
+    }
+
+    .song {
+        width: 100%;
+        justify-content: center; /* Center song info */
+        margin: 0;
+        padding: 0;
+    }
+
+    .contols-slide-bar {
+        width: 100%;
+        justify-content: center; /* Center play/pause buttons */
+        padding-top: 5px;
+        gap: 25px; /* Add space between buttons for easier tapping */
+    }
+
+    .seek-bar-square {
+        justify-content: space-between; /* Spread timestamps */
+        width: 100%;
+        padding: 0 10px; /* Prevent text touching edges */
+    }
+
+    /* Hide desktop-only elements to prevent overflow */
+    .controls, .createbutton {
+        display: none; 
+    }
+    
+    .right {
+        margin: 0; /* Remove the desktop margin */
+        width: 100%;
+    }
+}

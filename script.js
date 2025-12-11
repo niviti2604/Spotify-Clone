@@ -12,40 +12,17 @@ function formatTime(seconds) {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = Math.floor(seconds % 60);
 
-    // .padStart(2, '0') ensures "5" becomes "05"
     const formattedMinutes = String(minutes).padStart(2, '0');
     const formattedSeconds = String(remainingSeconds).padStart(2, '0');
 
     return `${formattedMinutes}:${formattedSeconds}`;
 }
 
-// async function getSongs(folder) {
-//     currFolder=folder;
-//     let a = await fetch(`http://127.0.0.1:5501/${folder}/`);
-//     let response = await a.text();
-//     console.log("response:" ,response);
-//     let div = document.createElement("div");
-//     div.innerHTML = response;
-//     console.log("div:" , div);
-//     let as = div.getElementsByTagName("a");
-
-//     for (let i = 0; i < as.length; i++) {
-//         //songs array is collection of all links to songs
-//         let song = as[i];
-//         if (song.href.endsWith(".mp3")) {
-//             songs.push(song.href);
-//             let dummy = song.href.split(`/${folder}/`)[1];
-//             songname.push(dummy.replace(".mp3", ""));
-//         }
-//     }
-//     return songs;
-// }
-
 async function getSongs(folder) {
     currFolder = folder;
     
-    // GitHub Pages cannot "scan" directories. We must list files manually.
-    // ADD YOUR SONG FILENAMES HERE (without .mp3)
+    // Manual list for GitHub Pages (No directory scanning)
+    // Make sure these match your filenames exactly!
     let localSongs = [
         "Mileya Mileya",
         "Shut Up Bounce", 
@@ -55,22 +32,25 @@ async function getSongs(folder) {
         "Tum Ho Toh"
     ];
 
-    // Clear the arrays to avoid duplicates if called multiple times
+    // Clear arrays
     songs = [];
     songname = [];
 
     for (let i = 0; i < localSongs.length; i++) {
-        // Construct the full path manually
-        // Ensure your actual files are in 'songs/ncs/' in your repo
-        let fullPath = `/${folder}/` + localSongs[i] + ".mp3";
+        // FIX: Removed leading slash to make path relative for GitHub Pages
+        // It now produces "songs/ncs/SongName.mp3" instead of "/songs/ncs/..."
+        let fullPath = `${folder}/${localSongs[i]}.mp3`;
         songs.push(fullPath);
         songname.push(localSongs[i]);
     }
     
     return songs;
 }
-const playMusic = (ganna, paused = false) => {
-    currentsong.src = `/${currFolder}/` + ganna + ".mp3";
+
+const playMusic = (track, paused = false) => {
+    // FIX: Removed leading slash here too
+    currentsong.src = `${currFolder}/` + track + ".mp3";
+    
     if (!paused) {
         currentsong.play();
         document.querySelector("#play").src = "pause.svg";
@@ -78,7 +58,8 @@ const playMusic = (ganna, paused = false) => {
         document.querySelector("#play").src = "play-button.svg";
     }
 
-    let decodedName = ganna.replaceAll("%20", " ");
+    // Decode %20 back to spaces for display
+    let decodedName = track.replaceAll("%20", " ");
     document.querySelector(".song-title").innerHTML = decodedName;
     
     let songImage = document.querySelector(".song-info-image");
@@ -89,44 +70,42 @@ const playMusic = (ganna, paused = false) => {
 }
 
 async function main() {
-    let songs = await getSongs("songs/ncs");
+    // Ensure this folder path matches your actual folder structure
+    await getSongs("songs/ncs");
     
     // Load first song but don't play
     if (songname.length > 0) {
         playMusic(songname[0], true);
     }
 
-    // --- 1. Auto-Generate Library List (Your original code) ---
+    // --- 1. Auto-Generate Library List ---
     let songul = document.querySelector(".lib-cards ul");
-    if (!songul) {
-        console.error("Could not find the '.lib-cards ul' element!");
-        return;
-    }
-    
-    for (const name of songname) {
-        songul.innerHTML += `<li> <img src="${name.replaceAll('%20', " ") + ".jpg"}" alt="" class=>
-                        <div class="info">
-                            <div class="bold">${name.replaceAll('%20', " ")}</div>
-                            <div class="normal">Niviti Sharma</div>
-                        </div>
-                           
-                           <div clas="lib-circle">
-                           <img src="play-button.svg" alt="" class="">
-                           </div>
-                        </li>`;
+    if (songul) {
+        songul.innerHTML = ""; // Clear existing
+        for (const name of songname) {
+            // FIX: Removed the typo "class=>"
+            songul.innerHTML += `<li> 
+                <img src="${name}.jpg" alt="${name}" onerror="this.src='music-note-svgrepo-com.svg'">
+                <div class="info">
+                    <div class="bold">${name}</div>
+                    <div class="normal">Niviti Sharma</div>
+                </div>
+                <div class="lib-circle">
+                    <img src="play-button.svg" alt="">
+                </div>
+            </li>`;
+        }
     }
 
-    // --- 2. [NEW] Auto-Generate Playlist Cards ---
+    // --- 2. Auto-Generate Playlist Cards ---
     let cardContainer = document.querySelector(".cards");
     if (cardContainer) {
-        cardContainer.innerHTML = ""; // Clear existing hardcoded cards
+        cardContainer.innerHTML = ""; 
         for (const name of songname) {
-            let cleanName = name.replaceAll("%20", " ");
-            // Creates a card for every song found in the folder
             cardContainer.innerHTML += `
                 <div class="card bg-grey-light round-border">
-                    <img src="${cleanName}.jpg" alt="${cleanName}" onerror="this.src='music-note-svgrepo-com.svg'">
-                    <div class="cardtitle">${cleanName}</div>
+                    <img src="${name}.jpg" alt="${name}" onerror="this.src='music-note-svgrepo-com.svg'">
+                    <div class="cardtitle">${name}</div>
                     <div class="about">Niviti Sharma</div>
                 </div>`;
         }
@@ -136,7 +115,7 @@ async function main() {
     Array.from(document.querySelector(".lib-cards").getElementsByTagName("li")).forEach(e => {
         e.addEventListener("click", element => {
             let songToPlay = e.querySelector(".info").firstElementChild.innerHTML.trim();
-            playMusic(songToPlay.replaceAll(" ", "%20"));
+            playMusic(songToPlay);
         })
     })
 
@@ -144,15 +123,15 @@ async function main() {
     Array.from(document.querySelectorAll(".cards .card")).forEach(card => {
         card.addEventListener("click", e => {
             let cardTitle = card.querySelector(".cardtitle").innerHTML.trim();
-            let encodedTitle = cardTitle.replaceAll(" ", "%20");
-            
-            if (songname.includes(encodedTitle)) {
-                playMusic(encodedTitle);
+            // FIX: Directly play the title. Don't encode with %20 yet, playMusic handles the src.
+            // The logic: songname array has "Name Name", cardTitle is "Name Name". They match.
+            if (songname.includes(cardTitle)) {
+                playMusic(cardTitle);
             }
         });
     });
 
-    // --- Playbar & Controls (Kept exactly as is) ---
+    // --- Playbar & Controls ---
     let playbutton = document.querySelector("#play")
     playbutton.addEventListener("click", () => {
         if (currentsong.paused) {
@@ -168,12 +147,17 @@ async function main() {
     currentsong.addEventListener("timeupdate", () => {
         document.querySelector(".starttime").innerHTML = formatTime(currentsong.currentTime);
         document.querySelector(".currenttime").innerHTML = formatTime(currentsong.duration);
-        document.querySelector(".circle").style.left = ((currentsong.currentTime) / (currentsong.duration)) * 100 + "%";
+        
+        // Prevent NaN error when song hasn't started
+        if(!isNaN(currentsong.duration)){
+             document.querySelector(".circle").style.left = ((currentsong.currentTime) / (currentsong.duration)) * 100 + "%";
+        }
     })
 
     document.querySelector(".seekbar").addEventListener("click", (e) => {
-        document.querySelector(".circle").style.left = ((e.offsetX * 100) / (e.target.getBoundingClientRect().width) + "%");
-        currentsong.currentTime = currentsong.duration * (e.offsetX) / (e.target.getBoundingClientRect().width);
+        let percent = (e.offsetX / e.target.getBoundingClientRect().width) * 100;
+        document.querySelector(".circle").style.left = percent + "%";
+        currentsong.currentTime = (currentsong.duration * percent) / 100;
     })
 
     document.querySelector(".hamburger").addEventListener("click", () => {
@@ -192,7 +176,9 @@ async function main() {
     previous.addEventListener("click", () => {
         currentsong.pause();
         let currentFileName = currentsong.src.split("/").slice(-1)[0];
-        let currentName = currentFileName.replace(".mp3", "");
+        // FIX: Decode URI component to turn "Tum%20Ho" back into "Tum Ho"
+        let currentName = decodeURIComponent(currentFileName).replace(".mp3", "");
+        
         let index = songname.indexOf(currentName);
         if ((index - 1) >= 0) {
             playMusic(songname[index - 1]);
@@ -203,9 +189,10 @@ async function main() {
     next.addEventListener("click", () => {
         currentsong.pause();
         let currentFileName = currentsong.src.split("/").slice(-1)[0];
-        let currentName = currentFileName.replace(".mp3", "");
+        // FIX: Decode URI component here as well
+        let currentName = decodeURIComponent(currentFileName).replace(".mp3", "");
+        
         let index = songname.indexOf(currentName);
-
         if ((index + 1) < songname.length) {
             playMusic(songname[index + 1]);
             id.src="pause.svg";
@@ -213,8 +200,7 @@ async function main() {
     })
 
     document.querySelector(".volume-seekbar").getElementsByTagName("input")[0].addEventListener("change",(e)=>{
-        console.log(e.target.value);
-        currentsong.volume=parseFloat(e.target.value)/100;
+        currentsong.volume = parseInt(e.target.value)/100;
     })
 }
 main();
